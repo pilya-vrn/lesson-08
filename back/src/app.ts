@@ -22,7 +22,7 @@ app.use(fileUpload({
 }))
 
 Routes.forEach(({ method, path, middleware = [], action }) => {
-  app[method](path, middleware, async (req: Request, res: Response, next: express.NextFunction) => {
+  app[method](`/api/v1${path}`, middleware, async (req: Request, res: Response, next: express.NextFunction) => {
     try {
       await action(req, res, next)
     } catch (err) {
@@ -34,4 +34,3 @@ Routes.forEach(({ method, path, middleware = [], action }) => {
 app.all('*', (req: Request, res: Response) => {
   handlerError(new NotFoundError(), req, res)
 })
-
