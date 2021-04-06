@@ -16,7 +16,7 @@ export declare namespace Auth {
   namespace Registration {
     interface Params {
       login: string;
-      mail: string;
+      email: string;
       password: string;
       passwordConfirm: string;
     }

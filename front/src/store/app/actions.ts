@@ -1,4 +1,5 @@
 import { apiAuthLogin } from '../../api/auth'
+import { apiUserCreate } from "../../api/user";
 import { App } from '../../types/app'
 import { AppAction } from './appAction'
 import { AppState } from './types'
@@ -17,6 +18,11 @@ const appFetchError = (payload: string): AppState.Action.FetchError => ({
   payload
 })
 
+const appRegSuccess = (payload: string): AppState.Action.RegisterSuccess => ({
+  type: AppAction.RegSuccess,
+  payload,
+});
+
 export const appActions: AppState.ActionThunk = {
   appLogin: params => async (dispatch) => {
     dispatch(appFetch())
@@ -27,5 +33,14 @@ export const appActions: AppState.ActionThunk = {
     } catch (err) {
       dispatch(appFetchError('Ошибка авторизации.'))
     }
-  }
+  },
+  appCreate: params => async (dispatch) => {
+
+    try {
+      await apiUserCreate(params);
+      dispatch(appRegSuccess("Успешная регистрация"));
+    } catch (err) {
+      dispatch(appFetchError("Ошибка регистрации"));
+    }
+  },
 }

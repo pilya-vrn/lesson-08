@@ -16,6 +16,7 @@ import './RegistrationForm.css'
 interface StateProps {
   loading: boolean;
   errorText: string;
+  successRegText: string;
 }
 
 interface DispatchProps extends AppState.ActionThunk {}
@@ -28,23 +29,25 @@ const b = block('reg-form')
 
 const schema: Yup.SchemaOf<Auth.Registration.Params> = Yup.object().shape(({
   login: Yup.string().required(),
-  mail: Yup.string().required(),
+  email: Yup.string().required(),
   password: Yup.string().required(),
-  passwordConfirm: Yup.string().required()
+  passwordConfirm: Yup.string()
+    .oneOf([Yup.ref("password")], "Passwords do not match")
+    .required(),
 }))
 
-const RegistrationPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) => {
+const RegistrationPresenter: React.FC<Props> = ({ loading, errorText, appCreate, successRegText }) => {
   const { errors, values, submitForm, handleChange } = useFormik<Auth.Registration.Params>({
     initialValues: {
       login: '',
-      mail: '',
+      email: '',
       password: '',
       passwordConfirm: ''
 
     },
     validationSchema: schema,
     onSubmit: async (fields) => {
-      await appLogin(fields)
+      await appCreate(fields)
     }
   })
 
@@ -69,9 +72,9 @@ const RegistrationPresenter: React.FC<Props> = ({ loading, errorText, appLogin }
         className={b('field')}
         label={'mail'}
         name={'mail'}
-        value={values.mail}
+        value={values.email}
         onChange={handleChange}
-        error={errors?.mail}
+        error={errors?.email}
         disabled={loading}
       />
       <Input
@@ -88,15 +91,17 @@ const RegistrationPresenter: React.FC<Props> = ({ loading, errorText, appLogin }
         className={b('field')}
         label={'Подтвердите пароль'}
         name={'confirmPassword'}
+        htmlType={InputType.Password}
         value={values.passwordConfirm}
         onChange={handleChange}
         error={errors?.passwordConfirm}
         disabled={loading}
       />
       {!!errorText && <p className={'error'}>{errorText}</p>}
+      {!!successRegText && <p className={'success'}>{successRegText}</p>}
       <div>
-        <Button text={'Зарегистрироваться'} disabled={loading} />
-        <Button text={'Войти'} onClick={handlerSubmit} disabled={loading} />
+        {/* <Button text={'Зарегистрироваться'} disabled={loading} /> */}
+        <Button text={'Зарегистрироваться'} onClick={handlerSubmit} disabled={loading} />
       </div>
     </form>
   )
@@ -104,7 +109,8 @@ const RegistrationPresenter: React.FC<Props> = ({ loading, errorText, appLogin }
 
 const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState.State> = ({ app }) => ({
   loading: app.loading,
-  errorText: app.errorText
+  errorText: app.errorText,
+  successRegText: app.successRegText,
 })
 
 const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { ...appActions }
