@@ -1,0 +1,28 @@
+.reg-form {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #2A8181;
+  background-size: cover;
+  border-radius: 30px;
+  margin-top: 5%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
+
+  &__title {
+    /* margin-top: -5%; */
+    /* padding-top: 30px; */
+    /* text-align: center; */
+    font-size: 30px;
+  }
+}

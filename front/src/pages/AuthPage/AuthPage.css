@@ -1,5 +1,5 @@
 .auth-page {
-  width: 500px;
+  /* width: 500px;
   height: 500px;
   margin: 0 auto;
   background-color: #2A8181;
@@ -9,15 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
 
-  &__header {
-    margin-top: -20%;
+  /* &__header {
+    margin-top: -20px;
     text-align: center;
     font-size: 30px;
-  }
+  } */
 
-  &__mail-input, &__password-input {
+  /* &__mail-input, &__password-input {
     padding-inline-start: 15px;
     margin-top: 10%;
     height: 50px;
@@ -28,9 +28,9 @@
     &:active, &:focus {
       outline: none;
     }
-  }
+  } */
 
-  &__submit {
+  /* &__submit {
     margin-bottom: 30px;
     margin-top: 10%;
     cursor: pointer;
@@ -41,9 +41,9 @@
     background-color: #033333;
     border: none;
     border-radius: 10px;
-  }
+  } */
 
-  &__link {
+  /* &__link {
     text-decoration: none;
     &:link,
     &:visited,
@@ -52,7 +52,7 @@
     &:active {
       color: white;
     }
-  }
+  } */
 
 
 }
