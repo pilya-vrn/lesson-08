@@ -1,9 +1,10 @@
 import block from 'bem-cn'
 import React from 'react'
 import { AuthForm } from '../../components/Forms/AuthForm/AuthForm'
+import { BasePageProps } from '../../types/base'
 import './AuthPage.css'
 
-interface Props {
+interface Props extends BasePageProps {
 }
 
 const b = block('auth-page')
@@ -11,21 +12,7 @@ const b = block('auth-page')
 export const AuthPage: React.FC<Props> = () => {
   return (
     <div className={b()}>
-      <AuthForm />
-        {/* <form>
-          <div className={b('header')}>Страница входа</div>
-          <input type="email" placeholder="Введите email" required name="mail"
-          className={b('mail-input')}/>
-          <br />
-          <input type="password" placeholder="Введите пароль" required name="password"
-          className={b('password-input')}/>
-          <br />
-          <input type="submit" value="Войти" className={b('submit')}/>
-          <br />
-          <a href="#" className={b('link')}>Восстановить пароль</a>
-          <br />
-          <a href="#" className={b('link')}>Незарегистрированны? Создать аккаунт</a>
-        </form> */}
+      <AuthForm className={b('form')} />
     </div>
   )
 }

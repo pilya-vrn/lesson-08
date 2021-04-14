@@ -12,13 +12,4 @@ export declare namespace Auth {
       refreshToken: string;
     }
   }
-
-  namespace Registration {
-    interface Params {
-      login: string;
-      email: string;
-      password: string;
-      passwordConfirm: string;
-    }
-  }
 }

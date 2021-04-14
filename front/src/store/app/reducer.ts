@@ -1,13 +1,12 @@
+import { Reducer } from 'redux'
 import { AppAction } from './appAction'
 import { AppState } from './types'
-import { Reducer } from 'redux'
 
 const initState: AppState.State = {
   loading: false,
   accessToken: '',
   refreshToken: '',
-  errorText: '',
-  successRegText: '',
+  errorText: ''
 }
 
 export const appReducer: Reducer<AppState.State, AppState.Action.All> = (state = initState, action) => {
@@ -31,11 +30,14 @@ export const appReducer: Reducer<AppState.State, AppState.Action.All> = (state =
         loading: false,
         errorText: action.payload
       }
-    case AppAction.RegSuccess:
-      return{
+    case AppAction.ClearError:
+      return {
         ...state,
-        loading:false,
-        successRegText:action.payload,
+        errorText: ''
+      }
+    case AppAction.Clear:
+      return {
+        ...initState
       }
     default:
       return state
