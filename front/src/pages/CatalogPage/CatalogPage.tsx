@@ -1,15 +1,49 @@
 import block from 'bem-cn'
 import React from 'react'
-import { ToggleButton } from '../../components/ToggleButton/ToggleButton'
+import { Card } from '../../components/Card/Card'
+import { BasePageProps } from '../../types/base'
 import './CatalogPage.css'
 
-const b = block('toggle-button')
+interface Props extends BasePageProps {
+}
 
-interface Props {}
-export const CatalogPage: React.FC<Props> = () => {
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+interface UserTest {
+  id: number;
+  email: string;
+  num: number;
+}
+
+const users: User[] = [
+  {
+    id: 1,
+    name: 'Name 1',
+    age: 20
+  },
+  {
+    id: 2,
+    name: 'Name 2',
+    age: 30
+  }
+]
+
+const b = block('catalog-page')
+
+export const CatalogPage: React.FC<Props> = ({ match }) => {
   return (
     <div className={b()}>
-      <ToggleButton />
+      <Card title={'Каталог'}>
+        {/*<Select<User>*/}
+        {/*  data={users}*/}
+        {/*  renderValue={item => `${item.id}`}*/}
+        {/*  renderLabel={item => item.name + ' ' + item.age}*/}
+        {/*/>*/}
+      </Card>
     </div>
   )
 }
